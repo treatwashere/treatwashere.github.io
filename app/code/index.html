@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>treatwashere | Hub & Changelog</title>
+    <title>treat | Hub & Changelog</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -26,10 +26,17 @@
 
     <!-- Header / Hero Section -->
     <header class="max-w-4xl mx-auto px-6 pt-16 pb-10 text-center">
-        <div class="inline-flex items-center justify-center p-3 bg-indigo-500/10 rounded-full mb-4 border border-indigo-500/20">
-            <i class="fa-solid fa-terminal text-indigo-400 text-xl"></i>
+        
+        <!-- Updated Image Icon -->
+        <div class="flex justify-center mb-4">
+            <img 
+                src="https://raw.githubusercontent.com/treatwashere/assets/main/Screenshot_20260109-155441-049.png" 
+                alt="treat logo" 
+                class="w-24 h-24 rounded-full border-2 border-indigo-500/30 shadow-lg object-cover"
+            >
         </div>
-        <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl">treatwashere</h1>
+
+        <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl">treat</h1>
         <p class="mt-3 text-slate-400 text-lg max-w-xl mx-auto">Welcome to my central hub. Track my latest projects, repository updates, changelogs, and video content all in one place.</p>
         
         <!-- Quick Social / Links -->
@@ -37,8 +44,9 @@
             <a href="https://github.com/treatwashere" target="_blank" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-sm font-medium transition flex items-center gap-2">
                 <i class="fa-brands fa-github"></i> GitHub
             </a>
-            <!-- Replace with your actual channel link -->
-            <a href="https://youtube.com/@treatwashere" target="_blank" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-sm font-medium transition flex items-center gap-2 text-rose-400">
+            
+            <!-- Updated Channel Link -->
+            <a href="https://youtube.com/@treatYTT" target="_blank" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-sm font-medium transition flex items-center gap-2 text-rose-400">
                 <i class="fa-brands fa-youtube"></i> Channel
             </a>
         </div>
@@ -93,7 +101,7 @@
 
     <!-- Footer -->
     <footer class="border-t border-slate-800 text-center py-6 text-slate-500 text-sm">
-        <p>&copy; <span id="year"></span> treatwashere. Built with GitHub Pages & Tailwind CSS.</p>
+        <p>&copy; <span id="year"></span> treat. Built with GitHub Pages & Tailwind CSS.</p>
     </footer>
 
     <!-- JavaScript to Fetch GitHub Repos -->
@@ -103,12 +111,13 @@
         async function fetchRepos() {
             const container = document.getElementById('repos-container');
             try {
-                const response = await fetch('https://api.github.com/users/treatwashere/repos?sort=updated&per_page=6');
+                // Fetching up to 100 repositories to ensure all are shown
+                const response = await fetch('https://api.github.com/users/treatwashere/repos?sort=updated&per_page=100');
                 if (!response.ok) throw new Error('Failed to fetch repositories');
                 
                 const repos = await response.json();
                 
-                // Filter out the profile repo itself if you want, or keep it
+                // Keep all repos, or optionally filter out the profile repo itself
                 const filteredRepos = repos.filter(repo => repo.name.toLowerCase() !== 'treatwashere.github.io');
 
                 if (filteredRepos.length === 0) {
@@ -120,10 +129,10 @@
                     <a href="${repo.html_url}" target="_blank" class="bg-cardbg border border-slate-800 hover:border-indigo-500/50 p-5 rounded-xl transition group flex flex-col justify-between">
                         <div>
                             <div class="flex items-center justify-between mb-2">
-                                <h3 class="font-bold group-hover:text-indigo-400 transition flex items-center gap-2">
+                                <h3 class="font-bold group-hover:text-indigo-400 transition flex items-center gap-2 break-all">
                                     <i class="fa-regular fa-folder text-slate-500"></i> ${repo.name}
                                 </h3>
-                                ${repo.language ? `<span class="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">${repo.language}</span>` : ''}
+                                ${repo.language ? `<span class="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700 whitespace-nowrap ml-2">${repo.language}</span>` : ''}
                             </div>
                             <p class="text-slate-400 text-sm line-clamp-2 mb-4">${repo.description || 'No description provided.'}</p>
                         </div>
